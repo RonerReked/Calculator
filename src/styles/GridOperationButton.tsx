@@ -17,7 +17,7 @@ export const GridOperationButton: React.FC<GridOperationButtonProps> = ({
   selectedOperation = 3,
 }) => {
   return (
-    <Grid item>
+    <Grid item xs={3}>
       <StyledButton
         fullWidth
         variant="outlined"

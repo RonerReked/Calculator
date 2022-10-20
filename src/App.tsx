@@ -46,6 +46,21 @@ function App() {
                 selectOperation={selectOperation}
                 selectedOperation={operation}
               ></GridOperationButton>
+              <GridOperationButton
+                operation={"C"}
+                selectOperation={selectOperation}
+                selectedOperation={operation}
+              ></GridOperationButton>
+              <GridOperationButton
+                operation={"%"}
+                selectOperation={selectOperation}
+                selectedOperation={operation}
+              ></GridOperationButton>
+              <GridOperationButton
+                operation={"/"}
+                selectOperation={selectOperation}
+                selectedOperation={operation}
+              ></GridOperationButton>
             </Grid>
           </Grid>
         </CalculatorBase>
