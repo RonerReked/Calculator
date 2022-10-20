@@ -1,5 +1,7 @@
 import { CssBaseline, Grid, Paper, styled, ThemeProvider } from "@mui/material";
 import { Container } from "@mui/system";
+import { useState } from "react";
+import { GridOperationButton } from "./styles/GridOperationButton";
 import theme from "./theme/theme";
 
 const OutputContainer = styled("div")(({ theme }) => ({
@@ -18,6 +20,17 @@ const CalculatorBase = styled(Paper)(({ theme }) => ({
 }));
 
 function App() {
+  const [currentValue, setCurrentValue] = useState("0");
+  const [operation, setOperation] = useState("");
+
+  const selectOperation = (operation: string) => {
+    setOperation(operation);
+  };
+
+  const setDigit = (digit: string) => {
+    setCurrentValue(digit);
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -25,7 +38,14 @@ function App() {
         <CalculatorBase elevation={3}>
           <Grid container spacing={1}>
             <Grid item xs={12}>
-              <OutputContainer>0</OutputContainer>
+              <OutputContainer>{currentValue}</OutputContainer>
+            </Grid>
+            <Grid item container columnSpacing={1}>
+              <GridOperationButton
+                operation={"AC"}
+                selectOperation={selectOperation}
+                selectedOperation={operation}
+              ></GridOperationButton>
             </Grid>
           </Grid>
         </CalculatorBase>
