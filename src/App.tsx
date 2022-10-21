@@ -37,12 +37,25 @@ function App() {
     setOperation(operation);
   };
 
+  const clear = () => {
+    setPrevValue("")
+    setOperation("")
+    setCurrentValue("0")
+    setOverwrite(true)
+  }
+
+  const del = () => {
+    setCurrentValue("0")
+    setOverwrite(true)
+  }
+
   const setDigit = (digit: string) => {
     if (
       (currentValue[0] === "0" && digit === "0") ||
       (currentValue.includes(".") && digit == ".")
     )
       return;
+
     if (overwrite && digit !== ".") {
       setCurrentValue(digit);
     } else {
