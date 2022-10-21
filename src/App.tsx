@@ -1,4 +1,11 @@
-import { Button, CssBaseline, Grid, Paper, styled, ThemeProvider } from "@mui/material";
+import {
+  Button,
+  CssBaseline,
+  Grid,
+  Paper,
+  styled,
+  ThemeProvider,
+} from "@mui/material";
 import { Container } from "@mui/system";
 import { useState } from "react";
 import { GridDigitButton } from "./styles/GridDigitButton";
@@ -23,13 +30,25 @@ const CalculatorBase = styled(Paper)(({ theme }) => ({
 function App() {
   const [currentValue, setCurrentValue] = useState("0");
   const [operation, setOperation] = useState("");
+  const [prevValue, setPrevValue] = useState("");
+  const [overwrite, setOverwrite] = useState(true);
 
   const selectOperation = (operation: string) => {
     setOperation(operation);
   };
 
   const setDigit = (digit: string) => {
-    setCurrentValue(digit);
+    if (
+      (currentValue[0] === "0" && digit === "0") ||
+      (currentValue.includes(".") && digit == ".")
+    )
+      return;
+    if (overwrite && digit !== ".") {
+      setCurrentValue(digit);
+    } else {
+      setCurrentValue(`${currentValue}${digit}`);
+    }
+    setOverwrite(false);
   };
 
   return (
@@ -94,7 +113,7 @@ function App() {
               />
             </Grid>
             <Grid item container columnSpacing={1}>
-              <GridDigitButton digit={"0"} enterDigit={setDigit}  xs={6}/>
+              <GridDigitButton digit={"0"} enterDigit={setDigit} xs={6} />
               <GridDigitButton digit={"."} enterDigit={setDigit} />
               <Grid item xs={3}>
                 <Button fullWidth variant="contained">
