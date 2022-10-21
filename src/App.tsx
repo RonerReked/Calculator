@@ -1,31 +1,10 @@
-import {
-  Button,
-  CssBaseline,
-  Grid,
-  Paper,
-  styled,
-  ThemeProvider,
-} from "@mui/material";
+import { Button, CssBaseline, Grid, ThemeProvider } from "@mui/material";
 import { Container } from "@mui/system";
 import { useState } from "react";
 import { GridDigitButton } from "./styles/GridDigitButton";
 import { GridOperationButton } from "./styles/GridOperationButton";
+import { CalculatorBase, OutputContainer } from "./styles/styles.d";
 import theme from "./theme/theme";
-
-const OutputContainer = styled("div")(({ theme }) => ({
-  width: "100%",
-  textAlign: "right",
-  height: "2em",
-  padding: theme.spacing(2),
-  fontSize: "3em",
-  overflow: "hidden",
-}));
-
-const CalculatorBase = styled(Paper)(({ theme }) => ({
-  padding: theme.spacing(2),
-  marginTop: theme.spacing(4),
-  borderRadius: 15,
-}));
 
 function App() {
   const [currentValue, setCurrentValue] = useState("0");
@@ -38,16 +17,21 @@ function App() {
   };
 
   const clear = () => {
-    setPrevValue("")
-    setOperation("")
-    setCurrentValue("0")
-    setOverwrite(true)
-  }
+    setPrevValue("");
+    setOperation("");
+    setCurrentValue("0");
+    setOverwrite(true);
+  };
 
   const del = () => {
-    setCurrentValue("0")
-    setOverwrite(true)
-  }
+    setCurrentValue("0");
+    setOverwrite(true);
+  };
+
+  const percent = () => {
+    const curr = parseFloat(currentValue);
+    setCurrentValue((curr / 100).toString());
+  };
 
   const setDigit = (digit: string) => {
     if (
@@ -86,7 +70,7 @@ function App() {
               />
               <GridOperationButton
                 operation={"%"}
-                selectOperation={selectOperation}
+                selectOperation={percent}
                 selectedOperation={operation}
               />
               <GridOperationButton

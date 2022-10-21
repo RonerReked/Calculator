@@ -1,4 +1,6 @@
-import { Button, Grid, styled } from "@mui/material";
+import { Grid } from "@mui/material";
+import { FC } from "react";
+import { StyledButton } from "./styles.d";
 
 interface GridOperationButtonProps {
   operation: string;
@@ -6,12 +8,7 @@ interface GridOperationButtonProps {
   selectedOperation: string;
 }
 
-const StyledButton = styled(Button)<{ selected: boolean }>((props) => ({
-  backgroundColor: "rgb(254,241,73,.1)",
-  borderColor: props.selected ? "#fff" : "rgba(255, 241, 73, 0.5)",
-}));
-
-export const GridOperationButton: React.FC<GridOperationButtonProps> = ({
+export const GridOperationButton: FC<GridOperationButtonProps> = ({
   operation,
   selectOperation,
   selectedOperation = 3,
