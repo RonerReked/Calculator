@@ -11,8 +11,49 @@ export const Calculator = () => {
   const [prevValue, setPrevValue] = useState("");
   const [overwrite, setOverwrite] = useState(true);
 
+  const calculate = () => {
+    if (!prevValue || !operation) return currentValue;
+
+    const curr = parseFloat(currentValue);
+    const prev = parseFloat(prevValue);
+
+    let result;
+    switch (operation) {
+      case "+":
+        result = prev + curr;
+        break;
+      case "-":
+        result = prev - curr;
+        break;
+      case "X":
+        result = prev * curr;
+        break;
+      case "/":
+        result = prev / curr;
+        break;
+    }
+    return result;
+  };
+
+  const equals = () => {
+    const val = calculate();
+    setCurrentValue(`${val}`);
+    setPrevValue("");
+    setOperation("");
+    setOverwrite(true);
+  };
+
   const selectOperation = (operation: string) => {
+    if (prevValue) {
+      const val = calculate();
+      setCurrentValue(`${val}`);
+      setPrevValue(`${val}`);
+    } else {
+      setPrevValue(currentValue);
+    }
+    setPrevValue(currentValue);
     setOperation(operation);
+    setOverwrite(true);
   };
 
   const clear = () => {
@@ -110,7 +151,7 @@ export const Calculator = () => {
             <GridDigitButton digit={"0"} enterDigit={setDigit} xs={6} />
             <GridDigitButton digit={"."} enterDigit={setDigit} />
             <Grid item xs={3}>
-              <Button fullWidth variant="contained">
+              <Button fullWidth variant="contained" onClick={equals}>
                 =
               </Button>
             </Grid>
