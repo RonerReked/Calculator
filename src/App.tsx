@@ -76,12 +76,12 @@ function App() {
             <Grid item container columnSpacing={1}>
               <GridOperationButton
                 operation={"AC"}
-                selectOperation={selectOperation}
+                selectOperation={clear}
                 selectedOperation={operation}
               />
               <GridOperationButton
                 operation={"C"}
-                selectOperation={selectOperation}
+                selectOperation={del}
                 selectedOperation={operation}
               />
               <GridOperationButton
